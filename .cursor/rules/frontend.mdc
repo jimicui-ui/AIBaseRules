@@ -1,0 +1,7 @@
+---
+description: Specific instructions for Angular frontend development. Activates when working on templates, styles, or TypeScript components.
+globs: frontend/**/src/**/*.{ts,html,css,scss}
+alwaysApply: false
+---
+
+@.ai/frontend.md

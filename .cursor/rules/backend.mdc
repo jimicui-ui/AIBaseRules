@@ -1,0 +1,7 @@
+---
+description: Specific guidelines for C# .NET Microservices and GCP cloud integrations. Activates on backend code modifications.
+globs: backend/**/*.cs, **/Dockerfile, **/k8s/**/*.yaml
+alwaysApply: false
+---
+
+@.ai/backend.md
