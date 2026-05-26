@@ -7,7 +7,7 @@ Apply when designing or changing backend services, use cases, domain logic, or i
 | Layer | Responsibility | May depend on |
 |-------|----------------|---------------|
 | **Domain** | Entities, value objects, aggregates, domain events, invariants, domain services | Nothing outside Domain |
-| **Application** | Use cases, commands/queries, handlers, orchestration, ports (interfaces) | Domain only |
+| **Application** | Use cases, commands/queries, handlers — **orchestration only**, ports (interfaces) | Domain only |
 | **Infrastructure** | Persistence, messaging, HTTP clients, cloud SDKs — **adapters** | Application + Domain abstractions |
 | **Presentation** | Minimal APIs, controllers, DTO mapping, auth middleware | Application (not Domain internals directly) |
 
@@ -17,8 +17,9 @@ Apply when designing or changing backend services, use cases, domain logic, or i
 - **Aggregates:** One aggregate root per consistency boundary; external references by id only, not mutable entity graphs.
 - **Domain purity:** No `DbContext`, `HttpClient`, `ILogger`, or framework attributes in Domain.
 - **Use cases in Application:** One handler/class per command or query; no business rules in controllers or `Program.cs`.
+- **Application orchestrates only:** Handlers load aggregates, call domain methods, and invoke ports — no core business rules, calculations, or domain conditionals in handlers. If any are found, **refactor into Domain entities** (or domain services) before adding or extending tests.
 - **Ports and adapters:** Application defines interfaces (repositories, gateways); Infrastructure implements them.
-- **Thin edges:** Presentation validates transport shape only; invariants and business validation live in Domain/Application.
+- **Thin edges:** Presentation validates transport shape only; invariants and business validation live in **Domain**.
 
 ## SOLID (implementation)
 
@@ -54,11 +55,19 @@ public class CreateOrderHandler {
     }
 }
 
-// ✅ Handler orchestrates ports
+// ❌ Business rules in handler
+public class CreateOrderHandler {
+    public async Task Handle(CreateOrderCommand cmd, ...) {
+        if (cmd.Items.Sum(i => i.Price) < 10) throw new InvalidOperationException("Minimum order");
+        // discount logic, status transitions, etc. in handler
+    }
+}
+
+// ✅ Handler orchestrates; rules live on Order
 public class CreateOrderHandler(IOrderRepository orders, IPaymentGateway payments) {
     public async Task Handle(CreateOrderCommand cmd, ...) {
-        var order = Order.Create(cmd.Items);
-        await payments.ChargeAsync(...);
+        var order = Order.Create(cmd.Items); // minimum, discounts, invariants inside Domain
+        await payments.ChargeAsync(order.Total, ...);
         await orders.AddAsync(order, ...);
     }
 }

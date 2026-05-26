@@ -24,11 +24,14 @@ Only the three named tiers have custom rules in the table; **Other is not a four
 
 If folders differ, infer by responsibility (pure rules → Domain; I/O adapters → Infrastructure; orchestration → Application; else → Other).
 
+**Application handlers:** orchestration only. Business rules, calculations, or domain conditionals in a handler → refactor into Domain entities/services **before** writing or extending tests. See [.ai/backend-ddd-solid.md](../../../.ai/backend-ddd-solid.md) and [.ai/testing.md](../../../.ai/testing.md#application-layer-orchestration-only).
+
 ## Workflow
 
 ```
 Coverage guard:
 - [ ] Classify each changed file (Domain | Infrastructure | Application | Other)
+- [ ] Application: handlers orchestrate only — refactor business logic to Domain before testing
 - [ ] Add/update tests first (where practical)
 - [ ] Implement or refactor production code
 - [ ] Run tests with coverage per layer
@@ -97,6 +100,7 @@ Complete only when **all** are true:
 
 ## Anti-patterns
 
+- Testing thick handlers that encode domain rules — refactor to Domain first, then test orchestration at ≥90%.
 - Treating Other as “optional” or UI as exempt from 100%.
 - Finishing without summary when Application is below 90% or any layer misses its target.
 - `ExcludeFromCodeCoverage` or threshold drops without user approval.

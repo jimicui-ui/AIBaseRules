@@ -43,19 +43,24 @@ When touched code in **any** layer does **not** meet its target (Domain/Infrastr
 
 Do not exclude files, lower thresholds, or add `ExcludeFromCodeCoverage` without explicit user approval. A gap summary is not a substitute for approval to waive coverage.
 
+## Application layer (orchestration only)
+
+The Application layer must **only orchestrate**. If handlers contain core business rules, calculations, or domain conditional logic, **refactor that logic into Domain entities** (or domain services) **before** adding or extending tests. Application tests then cover wiring, authorization, validation of commands/DTOs, and orchestration branches — not duplicated domain rule matrices in handler tests.
+
 ## Test-first workflow
 
 1. Classify each changed file: **Domain**, **Infrastructure**, **Application**, or **Other**.
-2. Add or update tests **before** or **with** production changes (red → green → refactor).
-3. Run the project test command with coverage; meet the target per tier/layer on touched code.
-4. If any target is missed, deliver the [coverage gap summary](#coverage-gap-summary).
-5. Prefer fast unit tests for Domain; fakes/in-memory doubles for Infrastructure; integration tests only where Application or Other behavior needs real wiring.
+2. For **Application** changes: confirm handlers are orchestration-only; move any business logic to Domain first.
+3. Add or update tests **before** or **with** production changes (red → green → refactor).
+4. Run the project test command with coverage; meet the target per tier/layer on touched code.
+5. If any target is missed, deliver the [coverage gap summary](#coverage-gap-summary).
+6. Prefer fast unit tests for Domain; fakes/in-memory doubles for Infrastructure; integration tests only where Application or Other behavior needs real wiring.
 
 ## What to test
 
 - **Domain:** every branch, invariant, and domain error path — no untested `throw` or guard clause.
 - **Infrastructure:** mapping, serialization, retry/error paths, and adapter contract edges (use test doubles for external systems).
-- **Application:** happy path, validation failures, authorization boundaries, and orchestration branches.
+- **Application:** happy path, command/DTO validation failures, authorization boundaries, and orchestration branches — after business logic lives in Domain (see [Application layer](#application-layer-orchestration-only)).
 - **Other:** every branch in touched UI/API/host code; framework-only boilerplate with no logic may be extracted or thin-wrapped so testable code stays at 100%.
 
 ## Refactoring constraints
