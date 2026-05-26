@@ -1,0 +1,7 @@
+---
+description: Backend services follow DDD layering and SOLID implementation. Activates on domain, application, infrastructure, and backend C# code.
+globs: backend/**/*.cs, **/Domain/**/*.cs, **/Application/**/*.cs, **/Infrastructure/**/*.cs, **/Presentation/**/*.cs
+alwaysApply: false
+---
+
+@.ai/backend-ddd-solid.md
