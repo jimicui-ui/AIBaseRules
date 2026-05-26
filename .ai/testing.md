@@ -33,7 +33,7 @@ When touched code in **any** layer does **not** meet its target (Domain/Infrastr
 ## Coverage gap summary
 
 **Layer:** [Domain | Infrastructure | Application | Other — name/path]
-**Target:** [100% | ≥90%]
+**Target:** [100% | great then 90%]
 **Actual:** [line % / branch % or “unknown” + how measured]
 **What’s uncovered:** [files, types, or branches — be specific]
 **Why not at target:** [e.g. untestable framework hook, missing test infra, time box, third-party binary, user asked to defer]
