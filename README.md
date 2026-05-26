@@ -12,7 +12,7 @@ Reusable AI coding rules for [Cursor](https://cursor.com) and [Claude Code](http
 | **backend** | `backend.md` | `backend/**/*.cs`, `**/Dockerfile`, `**/k8s/**/*.yaml` | .NET microservices, Minimal APIs, DI, async, GCP logging & secrets, containers |
 | **backend-ddd-solid** | `backend-ddd-solid.md` | `backend/**/*.cs`, `**/Domain/**`, `**/Application/**`, `**/Infrastructure/**`, `**/Presentation/**` (`.cs`) | DDD layering, aggregates, ports/adapters, SOLID in C# |
 | **frontend** | `frontend.md` | `frontend/**/src/**/*.{ts,html,css,scss}` | Angular standalone, OnPush, signals, strict TypeScript |
-| **testing** | `testing.md` | Tests and layered code (see `testing.mdc` `globs`) | 100% Domain/Infrastructure/Other, ≥90% Application; coverage gap summary if missed |
+| **testing** | `testing.md` | Tests and layered code (see `testing.mdc` `globs`) | 100% Domain/Infrastructure/Other, at least 90% Application; coverage gap summary if missed |
 
 ### Skills (optional)
 

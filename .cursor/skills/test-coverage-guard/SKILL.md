@@ -1,6 +1,6 @@
 ---
 name: test-coverage-guard
-description: Enforces layered test coverage (100% Domain, Infrastructure, and all Other layers; ≥90% Application), adds or updates tests, refactors for testability, and requires a coverage gap summary when any layer misses its target. Keeps .ai/testing.md and .cursor/rules/testing.mdc accurate. Use when writing tests, changing production code by layer, fixing coverage gaps, or refactoring for testability.
+description: Enforces layered test coverage (100% Domain, Infrastructure, and all Other layers; at least 90% Application), adds or updates tests, refactors for testability, and requires a coverage gap summary when any layer misses its target. Keeps .ai/testing.md and .cursor/rules/testing.mdc accurate. Use when writing tests, changing production code by layer, fixing coverage gaps, or refactoring for testability.
 ---
 
 # Test coverage guard
@@ -17,7 +17,7 @@ Apply on any task that touches production code or tests. Do not skip coverage ve
 |----------------|---------------|--------|
 | **Domain** | `**/Domain/**`, entities, VOs, domain services | 100% line + branch |
 | **Infrastructure** | `**/Infrastructure/**`, repos, adapters, EF, HTTP clients | 100% line + branch |
-| **Application** | `**/Application/**`, handlers, use cases, orchestration | ≥ 90% line + branch |
+| **Application** | `**/Application/**`, handlers, use cases, orchestration | at least 90% line + branch |
 | **Other** | Everything else (Presentation, UI, API host, `Program.cs`, shared utils, etc.) | **100%** line + branch |
 
 Only the three named tiers have custom rules in the table; **Other is not a fourth relaxed tier** — it must hit **100%**.
@@ -83,7 +83,7 @@ Complete only when **all** are true:
 
 - All tests pass.
 - Touched **Domain, Infrastructure, Other:** 100% line + branch **or** gap summary delivered.
-- Touched **Application:** ≥ 90% line + branch **or** gap summary delivered.
+- Touched **Application:** at least 90% line + branch **or** gap summary delivered.
 - No silent partial coverage on Other-layer code.
 
 ## Examples
@@ -100,7 +100,7 @@ Complete only when **all** are true:
 
 ## Anti-patterns
 
-- Testing thick handlers that encode domain rules — refactor to Domain first, then test orchestration at ≥90%.
+- Testing thick handlers that encode domain rules — refactor to Domain first, then test orchestration with at least 90% coverage.
 - Treating Other as “optional” or UI as exempt from 100%.
 - Finishing without summary when Application is below 90% or any layer misses its target.
 - `ExcludeFromCodeCoverage` or threshold drops without user approval.

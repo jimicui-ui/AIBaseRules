@@ -12,7 +12,7 @@ alwaysApply: false
 |------|-----------------|------------------------|
 | **Domain** | `**/Domain/**`, entities, value objects, domain services | **100%** |
 | **Infrastructure** | `**/Infrastructure/**`, persistence, messaging, external adapters | **100%** |
-| **Application** | `**/Application/**`, handlers, use cases, API/orchestration | **≥ 90%** |
+| **Application** | `**/Application/**`, handlers, use cases, API/orchestration | **at least 90%** |
 
 If the repo uses different folder names, map folders to the nearest tier before measuring.
 
@@ -27,13 +27,13 @@ Any production code **not** classified as Domain, Infrastructure, or Application
 
 ## Coverage gap summary
 
-When touched code in **any** layer does **not** meet its target (Domain/Infrastructure/Other **100%**, Application **≥ 90%**), stop and give the user a short written summary **before** treating the task as done:
+When touched code in **any** layer does **not** meet its target (Domain/Infrastructure/Other **100%**, Application **at least 90%**), stop and give the user a short written summary **before** treating the task as done:
 
 ```markdown
 ## Coverage gap summary
 
 **Layer:** [Domain | Infrastructure | Application | Other — name/path]
-**Target:** [100% | great then 90%]
+**Target:** [100% | at least 90%]
 **Actual:** [line % / branch % or “unknown” + how measured]
 **What’s uncovered:** [files, types, or branches — be specific]
 **Why not at target:** [e.g. untestable framework hook, missing test infra, time box, third-party binary, user asked to defer]
@@ -72,5 +72,5 @@ The Application layer must **only orchestrate**. If handlers contain core busine
 
 - All existing tests pass.
 - **Domain, Infrastructure, Other:** **100%** line and branch on touched code — or a coverage gap summary.
-- **Application:** **≥ 90%** line and branch on touched code — or a coverage gap summary.
+- **Application:** **at least 90%** line and branch on touched code — or a coverage gap summary.
 - No new untested public surface in Domain, Infrastructure, or Other without a documented gap summary.
