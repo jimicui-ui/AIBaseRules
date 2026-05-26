@@ -9,13 +9,15 @@ AIBaseRules/
 ├── .ai/                    # Source of truth (edit these)
 │   ├── base.md             # Always-on behavioral rules
 │   ├── backend.md          # .NET / GCP (file-scoped)
-│   └── frontend.md         # Angular (file-scoped)
+│   ├── frontend.md         # Angular (file-scoped)
+│   └── testing.md          # Layered coverage (file-scoped)
 ├── .cursor/
 │   ├── GuideLine.md        # This file
 │   └── rules/              # Cursor entry points
 │       ├── base.mdc
 │       ├── backend.mdc
-│       └── frontend.mdc
+│       ├── frontend.mdc
+│       └── testing.mdc
 └── CLAUDE.md               # Pointer for Claude Code
 ```
 
@@ -26,6 +28,7 @@ AIBaseRules/
 | `base.md` | Every chat (`alwaysApply: true`) — think first, keep changes small, define success criteria |
 | `backend.md` | When working under `backend/**/*.cs`, Dockerfiles, or `k8s/**/*.yaml` |
 | `frontend.md` | When working under `frontend/**/src/**/*.{ts,html,css,scss}` |
+| `testing.md` | When working on tests or layered code — 3 tiers (Domain/Infrastructure/Application) + 100% Other; gap summary if targets missed |
 
 ## How to use in a project
 

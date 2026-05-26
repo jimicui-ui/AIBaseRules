@@ -9,6 +9,7 @@ Reusable AI coding rules for [Cursor](https://cursor.com) and [Claude Code](http
 | **base** | Every chat (`alwaysApply: true`) | Think before coding, keep changes surgical, define verifiable success criteria |
 | **backend** | `backend/**/*.cs`, Dockerfiles, `k8s/**/*.yaml` | .NET microservices, GCP, containers |
 | **frontend** | `frontend/**/src/**/*.{ts,html,css,scss}` | Angular (standalone, signals, OnPush) |
+| **testing** | Tests and layered code (see `.ai/testing.md` globs) | 100% Domain/Infrastructure/Other, ≥90% Application; gap summary if missed |
 
 ## Repository layout
 

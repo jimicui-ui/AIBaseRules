@@ -1,0 +1,7 @@
+---
+description: Layered test coverage — 100% Domain/Infrastructure/Other, ≥90% Application; gap summary required when targets missed. Activates on tests and layered source files.
+globs: "**/*.{cs,ts}, **/tests/**/*, **/*Tests/**/*, **/*.spec.ts, **/*Test*.cs, **/Domain/**/*, **/Infrastructure/**/*, **/Application/**/*"
+alwaysApply: false
+---
+
+@.ai/testing.md
